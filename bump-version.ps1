@@ -1,6 +1,6 @@
 param()
 
-$projFull = Join-Path -Path $PSScriptRoot -ChildPath 'LmSharp.csproj'
+$projFull = Join-Path -Path $PSScriptRoot -ChildPath 'Lmss.csproj'
 [xml]$xml = Get-Content -LiteralPath $projFull
 $xml.PreserveWhitespace = $true  # important: keep existing whitespace
 
