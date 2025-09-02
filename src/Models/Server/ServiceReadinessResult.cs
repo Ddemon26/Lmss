@@ -13,7 +13,7 @@ public record ServiceReadinessResult {
     /// <summary>
     ///     The type of readiness status or error.
     /// </summary>
-    public LmsErrorType ErrorType { get; init; } = LmsErrorType.None;
+    public LmssErrorType ErrorType { get; init; } = LmssErrorType.None;
 
     /// <summary>
     ///     Number of available models (if any).
@@ -44,8 +44,8 @@ public record ServiceReadinessResult {
     ///     Gets a descriptive message about the current status.
     /// </summary>
     public string Message => ErrorType switch {
-        LmsErrorType.None => $"LMSService ready with {ModelCount} model(s) available",
-        LmsErrorType.NoModelsLoaded => "No models are currently loaded. Please load a model in LM Studio.",
+        LmssErrorType.None => $"LMSService ready with {ModelCount} model(s) available",
+        LmssErrorType.NoModelsLoaded => "No models are currently loaded. Please load a model in LM Studio.",
         _ => ErrorType.GetUserMessage(),
     };
 
@@ -59,14 +59,14 @@ public record ServiceReadinessResult {
     /// </summary>
     public static ServiceReadinessResult Ready(int modelCount) => new() {
         IsReady = true,
-        ErrorType = LmsErrorType.None,
+        ErrorType = LmssErrorType.None,
         ModelCount = modelCount,
     };
 
     /// <summary>
     ///     Creates a not-ready service result with typed error.
     /// </summary>
-    public static ServiceReadinessResult NotReady(LmsErrorType errorType, int modelCount = 0, string? technicalDetails = null) => new() {
+    public static ServiceReadinessResult NotReady(LmssErrorType errorType, int modelCount = 0, string? technicalDetails = null) => new() {
         IsReady = false,
         ErrorType = errorType,
         ModelCount = modelCount,

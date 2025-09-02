@@ -18,7 +18,7 @@ public record ChatResult {
     /// <summary>
     ///     The type of error that occurred (if any).
     /// </summary>
-    public LmsErrorType ErrorType { get; init; } = LmsErrorType.None;
+    public LmssErrorType ErrorType { get; init; } = LmssErrorType.None;
 
     /// <summary>
     ///     Technical error message for debugging (optional).
@@ -56,13 +56,13 @@ public record ChatResult {
     public static ChatResult CreateSuccess(string response) => new() {
         Success = true,
         Response = response,
-        ErrorType = LmsErrorType.None,
+        ErrorType = LmssErrorType.None,
     };
 
     /// <summary>
     ///     Creates a failed chat result with typed error.
     /// </summary>
-    public static ChatResult CreateFailure(LmsErrorType errorType, string? technicalMessage = null) => new() {
+    public static ChatResult CreateFailure(LmssErrorType errorType, string? technicalMessage = null) => new() {
         Success = false,
         Response = string.Empty,
         ErrorType = errorType,

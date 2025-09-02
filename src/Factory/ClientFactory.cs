@@ -15,7 +15,7 @@ public static class ClientFactory {
     ///     Creates a client with custom base URL.
     /// </summary>
     public static ILmss Create(string baseUrl) {
-        var settings = new LmsSettings { BaseUrl = baseUrl };
+        var settings = new LmssSettings { BaseUrl = baseUrl };
         return new LmssClient( settings );
     }
 
@@ -23,7 +23,7 @@ public static class ClientFactory {
     ///     Creates a client with custom base URL and API key.
     /// </summary>
     public static ILmss Create(string baseUrl, string apiKey) {
-        var settings = new LmsSettings {
+        var settings = new LmssSettings {
             BaseUrl = baseUrl,
             ApiKey = apiKey,
         };
@@ -33,14 +33,14 @@ public static class ClientFactory {
     /// <summary>
     ///     Creates a client with custom settings.
     /// </summary>
-    public static ILmss Create(LmsSettings settings)
+    public static ILmss Create(LmssSettings settings)
         => new LmssClient( settings );
 
     /// <summary>
     ///     Creates a client using a configuration action.
     /// </summary>
-    public static ILmss Create(Action<LmsSettings> configure) {
-        var settings = new LmsSettings();
+    public static ILmss Create(Action<LmssSettings> configure) {
+        var settings = new LmssSettings();
         configure( settings );
         return new LmssClient( settings );
     }

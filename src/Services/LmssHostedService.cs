@@ -8,18 +8,18 @@ namespace Lmss.Services;
 ///     Background service for LM Studio operations in long-running applications.
 ///     Provides continuous monitoring and automated workflows.
 /// </summary>
-public class LmsHostedService : BackgroundService {
-    readonly ILogger<LmsHostedService> m_logger;
+public class LmssHostedService : BackgroundService {
+    readonly ILogger<LmssHostedService> m_logger;
 
-    public LmsHostedService(ILmss client, ILogger<LmsHostedService> logger) {
-        Helper = new LmsService( client, logger );
+    public LmssHostedService(ILmss client, ILogger<LmssHostedService> logger) {
+        Helper = new LmssService( client, logger );
         m_logger = logger;
     }
 
     /// <summary>
     ///     Gets the service helper for manual operations.
     /// </summary>
-    public LmsService Helper { get; }
+    public LmssService Helper { get; }
 
     /// <summary>
     ///     Gets the currently selected model.
