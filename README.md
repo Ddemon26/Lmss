@@ -1,4 +1,4 @@
-![logo.png](.docs/logo.png)
+![logo.png](https://github.com/Ddemon26/Lmss/blob/main/.docs/logo.png)
 
 A lightweight .NET client library for interacting with LM Studio's local LLM server API. Supports chat completions, model management, structured output, and tool use.
 
