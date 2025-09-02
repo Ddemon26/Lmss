@@ -32,8 +32,8 @@ jobs:
 
       - name: Publish for multiple runtimes
         run: |
-          dotnet publish Lmss/Lmss.csproj -c Release -f net8.0 -o publish/net8.0
-          dotnet publish Lmss/Lmss.csproj -c Release -f netstandard2.0 -o publish/netstandard2.0
+          dotnet publish Lmss.csproj -c Release -f net8.0 -o publish/net8.0
+          dotnet publish Lmss.csproj -c Release -f netstandard2.0 -o publish/netstandard2.0
 
       - name: Create release archives
         run: |
