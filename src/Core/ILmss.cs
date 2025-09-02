@@ -12,7 +12,7 @@ public interface ILmss : IDisposable {
     ///     Gets the current model being used.
     /// </summary>
     string CurrentModel { get; }
-    
+
 
     /// <summary>
     ///     Gets the base URL of the client.

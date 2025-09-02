@@ -407,6 +407,15 @@ public class LmssClient : ILmss {
         }
     }
 
+    public void Dispose() {
+        if ( !m_disposed ) {
+            m_httpClient?.Dispose();
+            m_disposed = true;
+        }
+
+        GC.SuppressFinalize( this );
+    }
+
     async Task EnsureModelSelectedAsync() {
         if ( !string.IsNullOrEmpty( CurrentModel ) ) {
             return;
@@ -427,14 +436,5 @@ public class LmssClient : ILmss {
         else if ( m_settings.AutoSelectFirstAvailableModel && m_availableModels.Count > 0 ) {
             CurrentModel = m_availableModels[0];
         }
-    }
-    
-    public void Dispose() {
-        if ( !m_disposed ) {
-            m_httpClient?.Dispose();
-            m_disposed = true;
-        }
-
-        GC.SuppressFinalize( this );
     }
 }

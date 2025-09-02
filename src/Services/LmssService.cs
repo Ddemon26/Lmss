@@ -32,6 +32,14 @@ public class LmssService : IDisposable {
     public string CurrentModel => Client.CurrentModel;
 
     /// <summary>
+    ///     Disposes the underlying client.
+    /// </summary>
+    public void Dispose() {
+        Client?.Dispose();
+        GC.SuppressFinalize( this );
+    }
+
+    /// <summary>
     ///     Checks if the service is ready to handle requests.
     /// </summary>
     public async Task<ServiceReadinessResult> CheckReadinessAsync(CancellationToken cancellationToken = default) {
@@ -446,13 +454,5 @@ public class LmssService : IDisposable {
                 },
             ],
         };
-    }
-
-    /// <summary>
-    ///     Disposes the underlying client.
-    /// </summary>
-    public void Dispose() {
-        Client?.Dispose();
-        GC.SuppressFinalize( this );
     }
 }
