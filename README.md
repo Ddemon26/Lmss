@@ -1,4 +1,4 @@
-![logo.png](docs/logo.png)
+![logo.png](.docs/logo.png)
 
 A comprehensive .NET client library for interacting with LM Studio's local large language model server. LmSharp provides
 a clean, type-safe API for chat completions, model management, structured output generation, and tool use workflows.

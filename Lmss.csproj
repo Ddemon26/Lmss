@@ -53,10 +53,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="Examples\**"/>
-        <None Remove="Examples\**"/>
-        <Content Remove="Examples\**"/>
-        <EmbeddedResource Remove="Examples\**"/>
+        <Compile Remove=".examples\**"/>
+        <None Remove=".examples\**"/>
+        <Content Remove=".examples\**"/>
+        <EmbeddedResource Remove=".examples\**"/>
     </ItemGroup>
 
     <ItemGroup>
