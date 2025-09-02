@@ -65,25 +65,5 @@ Push-Location -LiteralPath $PSScriptRoot
 dotnet build
 $code = $LASTEXITCODE
 
-if ($code -eq 0)
-{
-    Write-Host "Build succeeded. Running move-package.ps1..."
-    $moveScript = Join-Path -Path $PSScriptRoot -ChildPath 'move-package.ps1'
-    if (Test-Path -LiteralPath $moveScript)
-    {
-        & $moveScript
-        $code = $LASTEXITCODE
-    }
-    else
-    {
-        Write-Error "move-package.ps1 not found at $moveScript"
-        $code = 1
-    }
-}
-else
-{
-    Write-Host "Build failed. Skipping move-package.ps1."
-}
-
 Pop-Location
 exit $code
