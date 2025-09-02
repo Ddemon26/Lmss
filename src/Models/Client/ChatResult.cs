@@ -1,4 +1,4 @@
-using Lmss.Logging.Errors;
+using Lmss.Errors;
 namespace Lmss.Models.Client;
 
 /// <summary>
