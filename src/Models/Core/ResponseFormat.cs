@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-namespace Lmss.Models.Core;
+namespace Lmss.Models;
 
 /// <summary>
 ///     Represents the response format configuration for structured output.

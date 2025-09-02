@@ -1,5 +1,5 @@
 using System.Text.Json;
-namespace Lmss.Models.Errors;
+namespace Lmss.Logging.Errors;
 
 /// <summary>
 ///     Represents the type of error that occurred in LM Studio operations.

@@ -1,4 +1,4 @@
-using Lmss.Models.Core;
+using Lmss.Models;
 namespace Lmss.Builders;
 
 /// <summary>

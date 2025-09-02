@@ -1,6 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-namespace Lmss.Models.Core;
+namespace Lmss.Models;
 
 /// <summary>
 ///     Represents the full response from the chat/completions endpoint.
