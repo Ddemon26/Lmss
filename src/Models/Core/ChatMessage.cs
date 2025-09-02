@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-namespace Lmss.Models;
+namespace Lmss.Models.Core;
 
 /// <summary>
 ///     Represents a message within the chat completion API.

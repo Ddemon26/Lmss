@@ -1,6 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-namespace Lmss.Models;
+namespace Lmss.Models.Core;
 
 /// <summary>
 ///     Represents a streaming chunk from the chat/completions endpoint.

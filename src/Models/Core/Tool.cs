@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-namespace Lmss.Models;
+namespace Lmss.Models.Core;
 
 /// <summary>
 ///     Represents a tool that can be called by the LLM.

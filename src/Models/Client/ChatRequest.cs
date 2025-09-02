@@ -1,4 +1,4 @@
-namespace Lmss.Models;
+namespace Lmss.Models.Client;
 
 /// <summary>
 ///     High-level request used by the library to build a chat completion request.

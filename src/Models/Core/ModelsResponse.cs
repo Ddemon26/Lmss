@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-namespace Lmss.Models;
+namespace Lmss.Models.Core;
 
 /// <summary>
 ///     Response from the /models endpoint.

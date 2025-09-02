@@ -1,4 +1,5 @@
-namespace Lmss.Models;
+using Lmss.Models.Errors;
+namespace Lmss.Models.Server;
 
 /// <summary>
 ///     Represents the readiness status of the LM Studio service.

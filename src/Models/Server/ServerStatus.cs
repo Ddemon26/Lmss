@@ -1,4 +1,4 @@
-namespace Lmss.Models;
+namespace Lmss.Models.Server;
 
 /// <summary>
 ///     Represents the status of the LM Studio server.

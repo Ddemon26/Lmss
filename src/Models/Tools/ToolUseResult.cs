@@ -1,4 +1,5 @@
-namespace Lmss.Models;
+using Lmss.Models.Core;
+namespace Lmss.Models.Tools;
 
 /// <summary>
 ///     Result of executing a complete tool use workflow.

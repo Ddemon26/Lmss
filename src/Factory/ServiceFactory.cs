@@ -1,4 +1,5 @@
 using Lmss.Models;
+using Lmss.Models.Configuration;
 using Lmss.Services;
 using Microsoft.Extensions.Logging;
 namespace Lmss;

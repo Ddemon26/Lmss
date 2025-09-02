@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-namespace Lmss.Models;
+namespace Lmss.Models.Core;
 
 /// <summary>
 ///     Represents the request payload sent to the chat/completions endpoint.

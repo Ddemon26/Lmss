@@ -1,4 +1,4 @@
-namespace Lmss.Models;
+namespace Lmss.Models.Errors;
 
 /// <summary>
 ///     Base exception for LM Studio client operations.

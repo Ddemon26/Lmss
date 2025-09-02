@@ -1,4 +1,5 @@
-namespace Lmss.Models;
+using Lmss.Models.Errors;
+namespace Lmss.Models.Client;
 
 /// <summary>
 ///     Represents the result of a chat operation.

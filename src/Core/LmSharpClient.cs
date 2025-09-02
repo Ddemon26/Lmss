@@ -4,6 +4,11 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Lmss.Models;
+using Lmss.Models.Client;
+using Lmss.Models.Configuration;
+using Lmss.Models.Core;
+using Lmss.Models.Errors;
+using Lmss.Models.Tools;
 namespace Lmss;
 
 public class LmSharpClient : ILmSharp {
@@ -208,7 +213,7 @@ public class LmSharpClient : ILmSharp {
             #elif NET6_0_OR_GREATER
             stream = await response.Content.ReadAsStreamAsync( cts.Token );
             #endif
-            
+
             reader = new StreamReader( stream );
         }
         catch (HttpRequestException ex) {
@@ -233,13 +238,13 @@ public class LmSharpClient : ILmSharp {
         try {
             string? line;
             #if NETSTANDARD2_0
-            while ((line = await reader.ReadLineAsync()) != null) { 
+            while ((line = await reader.ReadLineAsync()) != null) {
             #elif NET6_0_OR_GREATER
-            while ((line = await reader.ReadLineAsync( cts.Token )) != null) {    
+            while ((line = await reader.ReadLineAsync( cts.Token )) != null) {
             #endif
                 if ( string.IsNullOrWhiteSpace( line ) ) continue;
                 if ( line.StartsWith( "data: " ) ) {
-                    string jsonData = line.Substring(6);
+                    string jsonData = line.Substring( 6 );
                     if ( jsonData == "[DONE]" ) break;
 
                     StreamingChatResponse? chunk = null;
@@ -311,19 +316,18 @@ public class LmSharpClient : ILmSharp {
             }
 
             var choice = initialResponse.Choices.FirstOrDefault();
-            
+
             // Debug logging
-            Console.WriteLine($"[TOOL-WORKFLOW] Response finish_reason: {choice?.FinishReason}");
-            Console.WriteLine($"[TOOL-WORKFLOW] Has tool_calls: {choice?.Message.ToolCalls?.Any() == true}");
-            Console.WriteLine($"[TOOL-WORKFLOW] Tool calls count: {choice?.Message.ToolCalls?.Count ?? 0}");
-            Console.WriteLine($"[TOOL-WORKFLOW] Message content length: {choice?.Message.Content?.Length ?? 0}");
-            if (!string.IsNullOrEmpty(choice?.Message.Content))
-            {
-                Console.WriteLine($"[TOOL-WORKFLOW] Content preview: {choice.Message.Content.Substring(0, Math.Min(200, choice.Message.Content.Length))}");
+            Console.WriteLine( $"[TOOL-WORKFLOW] Response finish_reason: {choice?.FinishReason}" );
+            Console.WriteLine( $"[TOOL-WORKFLOW] Has tool_calls: {choice?.Message.ToolCalls?.Any() == true}" );
+            Console.WriteLine( $"[TOOL-WORKFLOW] Tool calls count: {choice?.Message.ToolCalls?.Count ?? 0}" );
+            Console.WriteLine( $"[TOOL-WORKFLOW] Message content length: {choice?.Message.Content?.Length ?? 0}" );
+            if ( !string.IsNullOrEmpty( choice?.Message.Content ) ) {
+                Console.WriteLine( $"[TOOL-WORKFLOW] Content preview: {choice.Message.Content.Substring( 0, Math.Min( 200, choice.Message.Content.Length ) )}" );
             }
-            
+
             if ( choice?.Message.ToolCalls?.Any() != true ) {
-                Console.WriteLine("[TOOL-WORKFLOW] No tool calls found in response, returning direct response");
+                Console.WriteLine( "[TOOL-WORKFLOW] No tool calls found in response, returning direct response" );
                 // No tool calls, return the direct response
                 return new ToolUseResult {
                     Success = true,
@@ -337,12 +341,12 @@ public class LmSharpClient : ILmSharp {
             conversationMessages.Add( choice.Message );
 
             // Execute each tool call
-            Console.WriteLine($"[TOOL-WORKFLOW] Starting to execute {choice.Message.ToolCalls.Count} tool calls");
+            Console.WriteLine( $"[TOOL-WORKFLOW] Starting to execute {choice.Message.ToolCalls.Count} tool calls" );
             foreach (var toolCall in choice.Message.ToolCalls) {
                 try {
-                    Console.WriteLine($"[TOOL-WORKFLOW] Executing tool: {toolCall.Function.Name}");
+                    Console.WriteLine( $"[TOOL-WORKFLOW] Executing tool: {toolCall.Function.Name}" );
                     string toolResult = await toolHandler( toolCall );
-                    Console.WriteLine($"[TOOL-WORKFLOW] Tool {toolCall.Function.Name} completed");
+                    Console.WriteLine( $"[TOOL-WORKFLOW] Tool {toolCall.Function.Name} completed" );
                     executedToolCalls.Add(
                         new ExecutedToolCall {
                             ToolCall = toolCall,
@@ -355,7 +359,7 @@ public class LmSharpClient : ILmSharp {
                     conversationMessages.Add( new ChatMessage( "tool", toolResult, ToolCallId: toolCall.Id ) );
                 }
                 catch (Exception ex) {
-                    Console.WriteLine($"[TOOL-WORKFLOW] Tool {toolCall.Function.Name} failed: {ex.Message}");
+                    Console.WriteLine( $"[TOOL-WORKFLOW] Tool {toolCall.Function.Name} failed: {ex.Message}" );
                     var errorMsg = $"Tool execution failed: {ex.Message}";
                     executedToolCalls.Add(
                         new ExecutedToolCall {
@@ -370,14 +374,15 @@ public class LmSharpClient : ILmSharp {
                     conversationMessages.Add( new ChatMessage( "tool", errorMsg, ToolCallId: toolCall.Id ) );
                 }
             }
-            Console.WriteLine("[TOOL-WORKFLOW] All tool calls completed, preparing final request");
+
+            Console.WriteLine( "[TOOL-WORKFLOW] All tool calls completed, preparing final request" );
 
             // Send updated conversation back to model for final response
-            Console.WriteLine("[TOOL-WORKFLOW] Making final request for natural language response");
-            Console.WriteLine($"[TOOL-WORKFLOW] Final conversation has {conversationMessages.Count} messages");
+            Console.WriteLine( "[TOOL-WORKFLOW] Making final request for natural language response" );
+            Console.WriteLine( $"[TOOL-WORKFLOW] Final conversation has {conversationMessages.Count} messages" );
             var finalRequest = request with { Messages = conversationMessages, Tools = null };
             var finalResponse = await SendChatCompletionAsync( finalRequest, cancellationToken );
-            Console.WriteLine("[TOOL-WORKFLOW] Got final response from model");
+            Console.WriteLine( "[TOOL-WORKFLOW] Got final response from model" );
 
             if ( finalResponse.Usage != null ) {
                 totalUsage = new Usage {

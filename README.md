@@ -1,10 +1,12 @@
 ![logo.png](docs/logo.png)
 
-A comprehensive .NET client library for interacting with LM Studio's local large language model server. LmSharp provides a clean, type-safe API for chat completions, model management, structured output generation, and tool use workflows.
+A comprehensive .NET client library for interacting with LM Studio's local large language model server. LmSharp provides
+a clean, type-safe API for chat completions, model management, structured output generation, and tool use workflows.
 
 ## Features
 
 **Core Functionality**
+
 - OpenAI-compatible API client for LM Studio
 - Support for chat completions with streaming responses
 - Model listing and management
@@ -13,6 +15,7 @@ A comprehensive .NET client library for interacting with LM Studio's local large
 - Conversation history management
 
 **Developer Experience**
+
 - Type-safe error handling with detailed categorization
 - Fluent builder patterns for requests
 - Comprehensive dependency injection support
@@ -21,6 +24,7 @@ A comprehensive .NET client library for interacting with LM Studio's local large
 - Full async/await support with cancellation tokens
 
 **Production Ready**
+
 - Graceful error handling and recovery
 - Connection resilience and health monitoring
 - Configurable timeouts and retry policies

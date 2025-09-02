@@ -1,4 +1,4 @@
-namespace Lmss.Models;
+namespace Lmss.Models.Configuration;
 
 public class LMSSettings {
     public string BaseUrl { get; set; } = "http://localhost:1234/v1";
