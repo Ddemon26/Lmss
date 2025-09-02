@@ -290,7 +290,7 @@ public class LmssClient : ILmss {
         await foreach (var chunk in SendChatCompletionStreamAsync( request, cancellationToken )) {
             string? content = chunk.Choices.FirstOrDefault()?.Delta.Content;
             if ( !string.IsNullOrEmpty( content ) ) {
-                yield return content;
+                yield return content ?? string.Empty;
             }
         }
     }
@@ -322,7 +322,7 @@ public class LmssClient : ILmss {
             Console.WriteLine( $"[TOOL-WORKFLOW] Tool calls count: {choice?.Message.ToolCalls?.Count ?? 0}" );
             Console.WriteLine( $"[TOOL-WORKFLOW] Message content length: {choice?.Message.Content?.Length ?? 0}" );
             if ( !string.IsNullOrEmpty( choice?.Message.Content ) ) {
-                Console.WriteLine( $"[TOOL-WORKFLOW] Content preview: {choice.Message.Content.Substring( 0, Math.Min( 200, choice.Message.Content.Length ) )}" );
+                Console.WriteLine( $"[TOOL-WORKFLOW] Content preview: {choice?.Message.Content?.Substring( 0, Math.Min( 200, choice.Message.Content.Length ) )}" );
             }
 
             if ( choice?.Message.ToolCalls?.Any() != true ) {
@@ -430,8 +430,8 @@ public class LmssClient : ILmss {
             }
         }
 
-        if ( !string.IsNullOrEmpty( m_settings.DefaultModel ) && m_availableModels.Contains( m_settings.DefaultModel ) ) {
-            CurrentModel = m_settings.DefaultModel;
+        if ( !string.IsNullOrEmpty( m_settings.DefaultModel ) && m_availableModels.Contains( m_settings.DefaultModel ?? string.Empty ) ) {
+            CurrentModel = m_settings.DefaultModel ?? string.Empty;
         }
         else if ( m_settings.AutoSelectFirstAvailableModel && m_availableModels.Count > 0 ) {
             CurrentModel = m_availableModels[0];
