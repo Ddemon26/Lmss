@@ -38,6 +38,7 @@
 
     <ItemGroup>
         <Compile Remove=".examples\**"/>
+        <Content Include=".github\workflows\build.yml" />
         <None Remove=".examples\**"/>
         <Content Remove=".examples\**"/>
         <EmbeddedResource Remove=".examples\**"/>
