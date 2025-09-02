@@ -6,16 +6,16 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageId>tcs.lmsharp</PackageId>
+        <PackageId>tcs.lmss</PackageId>
         <Version>1.0.3</Version>
         <Authors>Damon</Authors>
         <Company>TCS</Company>
-        <Product>LmSharp</Product>
+        <Product>lmss</Product>
         <Description>A lightweight .NET client library for interacting with LM Studio's local LLM server API. Supports chat completions, model management, structured output, and tool use.</Description>
         <PackageTags>lmstudio;llm;ai;chat;client;local;api;openai-compatible</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/Ddemon26/LmSharp</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/Ddemon26/LmSharp</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/Ddemon26/lmss</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Ddemon26/lmss</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <IncludeSymbols>true</IncludeSymbols>
