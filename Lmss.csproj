@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+      <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>tcs.lmsharp</PackageId>
+    <Version>1.0.3</Version>
+    <Authors>Damon</Authors>
+    <Company>TCS</Company>
+    <Product>LmSharp</Product>
+    <Description>A lightweight .NET client library for interacting with LM Studio's local LLM server API. Supports chat completions, model management, structured output, and tool use.</Description>
+    <PackageTags>lmstudio;llm;ai;chat;client;local;api;openai-compatible</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Ddemon26/LmSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Ddemon26/LmSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" >
+      <Define>DEPENDENCYINJECTION</Define>
+  </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.8" >
+        <Define>DEPENDENCYINJECTION_ABSTRACTIONS</Define>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.8" >
+        <Define>HOSTING_ABSTRACTIONS</Define>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.8" >
+        <Define>LOGGING_ABSTRACTIONS</Define>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json" Version="9.0.8" >
+        <Define>SYSTEM_TEXT_JSON</Define>
+    </PackageReference>
+    <PackageReference Include="System.Net.Http.Json" Version="9.0.8" />
+  </ItemGroup>
+
+    <Target Name="AddPackageDefines" BeforeTargets="Compile">
+        <PropertyGroup>
+            <DefineConstants>$(DefineConstants);%(PackageReference.Define)</DefineConstants>
+        </PropertyGroup>
+    </Target>
+    
+    <ItemGroup>
+        <PackageReference Include="IsExternalInit" Version="1.0.3" PrivateAssets="all" />
+        <PackageReference Include="IndexRange" Version="1.0.3" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="Examples\**" />
+        <None Remove="Examples\**" />
+        <Content Remove="Examples\**" />
+        <EmbeddedResource Remove="Examples\**" />
+    </ItemGroup>
+    
+    <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="LICENSE" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+    <PropertyGroup>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    </PropertyGroup>
+</Project>
