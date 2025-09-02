@@ -2,7 +2,7 @@
 
 A lightweight .NET client library for interacting with LM Studio's local LLM server API. Supports chat completions, model management, structured output, and tool use.
 
-[![NuGet](https://img.shields.io/nuget/v/LmsSharp.svg)](https://www.nuget.org/packages/LmsSharp)
+[![NuGet](https://img.shields.io/nuget/v/LmsSharp.svg)](https://www.nuget.org/packages/LmsSharp/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://github.com/Ddemon26/Lmss/actions/workflows/build.yml/badge.svg)](https://github.com/Ddemon26/Lmss/actions/workflows/build.yml)
 
