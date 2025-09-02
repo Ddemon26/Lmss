@@ -1,6 +1,6 @@
 namespace Lmss.Models.Configuration;
 
-public class LMSSettings {
+public class LmsSettings {
     public string BaseUrl { get; set; } = "http://localhost:1234/v1";
     public string ApiKey { get; set; } = "lm-studio";
     public string? DefaultModel { get; set; }

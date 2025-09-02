@@ -13,10 +13,10 @@ namespace Lmss.Services;
 ///     Shared helper for common LM Studio operations.
 ///     Provides reusable functionality for both regular and background services.
 /// </summary>
-public class LMSService {
+public class LmsService {
     readonly ILogger? m_logger;
 
-    public LMSService(ILmSharp client, ILogger? logger = null) {
+    public LmsService(ILmss client, ILogger? logger = null) {
         Client = client;
         m_logger = logger;
     }
@@ -24,7 +24,7 @@ public class LMSService {
     /// <summary>
     ///     Gets the underlying client for advanced operations.
     /// </summary>
-    public ILmSharp Client { get; }
+    public ILmss Client { get; }
 
     /// <summary>
     ///     Gets the currently selected model.
@@ -39,14 +39,14 @@ public class LMSService {
             bool healthy = await Client.IsHealthyAsync( cancellationToken );
             if ( !healthy ) {
                 m_logger?.LogWarning( "LM Studio server health check failed" );
-                return ServiceReadinessResult.NotReady( LMSErrorType.ServerUnavailable );
+                return ServiceReadinessResult.NotReady( LmsErrorType.ServerUnavailable );
             }
 
             List<string> models = await Client.GetAvailableModelsAsync( cancellationToken );
 
             if ( models.Count == 0 ) {
                 m_logger?.LogInformation( "LM Studio server is healthy but no models are loaded" );
-                return ServiceReadinessResult.NotReady( LMSErrorType.NoModelsLoaded );
+                return ServiceReadinessResult.NotReady( LmsErrorType.NoModelsLoaded );
             }
 
             return ServiceReadinessResult.Ready( models.Count );
@@ -409,14 +409,14 @@ public class LMSService {
     /// <summary>
     ///     Creates an error stream for string responses based on error type.
     /// </summary>
-    async IAsyncEnumerable<string> GetErrorStreamForType(LMSErrorType errorType) {
+    async IAsyncEnumerable<string> GetErrorStreamForType(LmsErrorType errorType) {
         yield return errorType.GetUserMessage();
     }
 
     /// <summary>
     ///     Creates an error stream for streaming chat responses based on error type.
     /// </summary>
-    async IAsyncEnumerable<StreamingChatResponse> GetErrorStreamingResponseForType(LMSErrorType errorType) {
+    async IAsyncEnumerable<StreamingChatResponse> GetErrorStreamingResponseForType(LmsErrorType errorType) {
         yield return new StreamingChatResponse {
             Choices = [
                 new StreamingChoice {

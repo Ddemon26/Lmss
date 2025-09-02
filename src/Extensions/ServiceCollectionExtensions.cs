@@ -14,8 +14,8 @@ public static class ServiceCollectionExtensions {
     /// <param name="services">The IServiceCollection to add the services to.</param>
     /// <returns>The updated IServiceCollection.</returns>
     public static IServiceCollection AddClient(this IServiceCollection services) {
-        services.AddSingleton<LMSSettings>();
-        services.AddScoped<ILmSharp, LmSharpClient>();
+        services.AddSingleton<LmsSettings>();
+        services.AddScoped<ILmss, LmssClient>();
         return services;
     }
 
@@ -25,9 +25,9 @@ public static class ServiceCollectionExtensions {
     /// <param name="services">The IServiceCollection to add the services to.</param>
     /// <param name="settings">The LMSSettings instance to register.</param>
     /// <returns>The updated IServiceCollection.</returns>
-    public static IServiceCollection AddClient(this IServiceCollection services, LMSSettings settings) {
+    public static IServiceCollection AddClient(this IServiceCollection services, LmsSettings settings) {
         services.AddSingleton( settings );
-        services.AddScoped<ILmSharp, LmSharpClient>();
+        services.AddScoped<ILmss, LmssClient>();
         return services;
     }
 
@@ -37,59 +37,59 @@ public static class ServiceCollectionExtensions {
     /// <param name="services">The IServiceCollection to add the services to.</param>
     /// <param name="configure">An action to configure the LMSSettings instance.</param>
     /// <returns>The updated IServiceCollection.</returns>
-    public static IServiceCollection AddClient(this IServiceCollection services, Action<LMSSettings> configure) {
-        services.AddSingleton<LMSSettings>( provider => {
-                var settings = new LMSSettings();
+    public static IServiceCollection AddClient(this IServiceCollection services, Action<LmsSettings> configure) {
+        services.AddSingleton<LmsSettings>( provider => {
+                var settings = new LmsSettings();
                 configure( settings );
                 return settings;
             }
         );
-        services.AddScoped<ILmSharp, LmSharpClient>();
+        services.AddScoped<ILmss, LmssClient>();
         return services;
     }
     #endregion
 
-    #region LmSharpService
+    #region LmssService
     /// <summary>
-    ///     Registers the LmSharpService with the dependency injection container.
+    ///     Registers the LmssService with the dependency injection container.
     /// </summary>
     /// <param name="services">The IServiceCollection to add the services to.</param>
     /// <returns>The updated IServiceCollection.</returns>
     public static IServiceCollection AddService(this IServiceCollection services) {
-        services.AddSingleton<LMSSettings>();
-        services.AddScoped<ILmSharp, LmSharpClient>();
-        services.AddScoped<LmSharpService>();
+        services.AddSingleton<LmsSettings>();
+        services.AddScoped<ILmss, LmssClient>();
+        services.AddScoped<LmssService>();
         return services;
     }
 
     /// <summary>
-    ///     Registers the LmSharpService with the dependency injection container using the provided settings.
+    ///     Registers the LmssService with the dependency injection container using the provided settings.
     /// </summary>
     /// <param name="services">The IServiceCollection to add the services to.</param>
     /// <param name="settings">The LMSSettings instance to register.</param>
     /// <returns>The updated IServiceCollection.</returns>
-    public static IServiceCollection AddService(this IServiceCollection services, LMSSettings settings) {
+    public static IServiceCollection AddService(this IServiceCollection services, LmsSettings settings) {
         services.AddSingleton( settings );
-        services.AddScoped<ILmSharp, LmSharpClient>();
-        services.AddScoped<LmSharpService>();
+        services.AddScoped<ILmss, LmssClient>();
+        services.AddScoped<LmssService>();
         return services;
     }
 
     /// <summary>
-    ///     Registers the LmSharpService with the dependency injection container using a configuration action.
+    ///     Registers the LmssService with the dependency injection container using a configuration action.
     /// </summary>
     /// <param name="services">The IServiceCollection to add the services to.</param>
     /// <param name="configure">An action to configure the LMSSettings instance.</param>
     /// <returns>The updated IServiceCollection.</returns>
-    public static IServiceCollection AddService(this IServiceCollection services, Action<LMSSettings> configure) {
-        services.AddSingleton<LMSSettings>( provider => {
-                var settings = new LMSSettings();
+    public static IServiceCollection AddService(this IServiceCollection services, Action<LmsSettings> configure) {
+        services.AddSingleton<LmsSettings>( provider => {
+                var settings = new LmsSettings();
                 configure( settings );
                 return settings;
             }
         );
-        services.AddScoped<ILmSharp, LmSharpClient>();
-        services.AddScoped<LmSharpService>();
+        services.AddScoped<ILmss, LmssClient>();
+        services.AddScoped<LmssService>();
         return services;
     }
     #endregion
@@ -101,9 +101,9 @@ public static class ServiceCollectionExtensions {
     /// <param name="services">The IServiceCollection to add the services to.</param>
     /// <returns>The updated IServiceCollection.</returns>
     public static IServiceCollection AddHostedService(this IServiceCollection services) {
-        services.AddSingleton<LMSSettings>();
-        services.AddScoped<ILmSharp, LmSharpClient>();
-        services.AddHostedService<LMSHostedService>();
+        services.AddSingleton<LmsSettings>();
+        services.AddScoped<ILmss, LmssClient>();
+        services.AddHostedService<LmsHostedService>();
         return services;
     }
 
@@ -113,10 +113,10 @@ public static class ServiceCollectionExtensions {
     /// <param name="services">The IServiceCollection to add the services to.</param>
     /// <param name="settings">The LMSSettings instance to register.</param>
     /// <returns>The updated IServiceCollection.</returns>
-    public static IServiceCollection AddHostedService(this IServiceCollection services, LMSSettings settings) {
+    public static IServiceCollection AddHostedService(this IServiceCollection services, LmsSettings settings) {
         services.AddSingleton( settings );
-        services.AddScoped<ILmSharp, LmSharpClient>();
-        services.AddHostedService<LMSHostedService>();
+        services.AddScoped<ILmss, LmssClient>();
+        services.AddHostedService<LmsHostedService>();
         return services;
     }
 
@@ -126,15 +126,15 @@ public static class ServiceCollectionExtensions {
     /// <param name="services">The IServiceCollection to add the services to.</param>
     /// <param name="configure">An action to configure the LMSSettings instance.</param>
     /// <returns>The updated IServiceCollection.</returns>
-    public static IServiceCollection AddHostedService(this IServiceCollection services, Action<LMSSettings> configure) {
-        services.AddSingleton<LMSSettings>( provider => {
-                var settings = new LMSSettings();
+    public static IServiceCollection AddHostedService(this IServiceCollection services, Action<LmsSettings> configure) {
+        services.AddSingleton<LmsSettings>( provider => {
+                var settings = new LmsSettings();
                 configure( settings );
                 return settings;
             }
         );
-        services.AddScoped<ILmSharp, LmSharpClient>();
-        services.AddHostedService<LMSHostedService>();
+        services.AddScoped<ILmss, LmssClient>();
+        services.AddHostedService<LmsHostedService>();
         return services;
     }
     #endregion

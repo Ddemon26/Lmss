@@ -7,7 +7,7 @@ namespace Lmss;
 ///     Interface for interacting with the Lmss, providing methods for model management, messaging, chat
 ///     completion, streaming, and tool workflows.
 /// </summary>
-public interface ILmSharp : IDisposable {
+public interface ILmss : IDisposable {
     /// <summary>
     ///     Gets the current model being used.
     /// </summary>

@@ -10,18 +10,18 @@ namespace Lmss.Services;
 ///     High-level service for common LM Studio operations.
 ///     Provides simplified methods for typical use cases.
 /// </summary>
-public class LmSharpService : IDisposable {
-    readonly ILogger<LmSharpService>? m_logger;
+public class LmssService : IDisposable {
+    readonly ILogger<LmssService>? m_logger;
 
-    public LmSharpService(ILmSharp client, ILogger<LmSharpService>? logger = null) {
+    public LmssService(ILmss client, ILogger<LmssService>? logger = null) {
         m_logger = logger;
-        Helper = new LMSService( client, m_logger );
+        Helper = new LmsService( client, m_logger );
     }
 
     /// <summary>
     ///     Gets the underlying client for advanced operations.
     /// </summary>
-    public ILmSharp Client => Helper.Client;
+    public ILmss Client => Helper.Client;
 
     /// <summary>
     ///     Gets the currently selected model.
@@ -31,7 +31,7 @@ public class LmSharpService : IDisposable {
     /// <summary>
     ///     Gets the helper for advanced operations.
     /// </summary>
-    public LMSService Helper { get; }
+    public LmsService Helper { get; }
 
     public void Dispose() {
         Client?.Dispose();

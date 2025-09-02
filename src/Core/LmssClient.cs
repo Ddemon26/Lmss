@@ -10,15 +10,15 @@ using Lmss.Models.Errors;
 using Lmss.Models.Tools;
 namespace Lmss;
 
-public class LmSharpClient : ILmSharp {
+public class LmssClient : ILmss {
     readonly HttpClient m_httpClient;
     readonly JsonSerializerOptions m_jsonOptions;
-    readonly LMSSettings m_settings;
+    readonly LmsSettings m_settings;
     List<string> m_availableModels = [];
     bool m_disposed;
 
-    public LmSharpClient(LMSSettings? settings = null) {
-        m_settings = settings ?? new LMSSettings();
+    public LmssClient(LmsSettings? settings = null) {
+        m_settings = settings ?? new LmsSettings();
         m_httpClient = new HttpClient();
 
         string baseUrl = m_settings.BaseUrl.TrimEnd( '/' ) + "/";
