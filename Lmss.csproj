@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>LmsSharp</PackageId>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Authors>Damon</Authors>
     <Company>TCS</Company>
     <Product>LmsSharp</Product>
@@ -21,6 +21,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageIcon>Icon.png</PackageIcon>
   </PropertyGroup>
   <Target Name="AddPackageDefines" BeforeTargets="Compile">
     <PropertyGroup>
@@ -41,8 +42,12 @@
     <Content Remove=".github\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".docs\Icon.png">
+      <Pack>True</Pack>
+    </None>
     <None Include="README.md" Pack="true" PackagePath="\" />
     <None Include="LICENSE" Pack="true" PackagePath="\" />
+    <None Include=".\.docs\Icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
   <PropertyGroup>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
